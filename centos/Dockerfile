@@ -2,11 +2,6 @@ FROM centos:centos7.2.1511
 
 MAINTAINER Tony Deng "wolf.deng@mgmail.com"
 
-RUN mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
-COPY config/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo
-COPY config/RPM-GPG-KEY-CentOS-7 /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-RUN rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-
 RUN yum install -y yum-plugin-ovl
 RUN yum -y update && yum clean all
 RUN yum -y install git gcc curl openssl openssl-devel ca-certificates tar && yum clean all
@@ -22,5 +17,3 @@ RUN curl -fsOSL ${RUST_DOWNLOAD_URL} \
     && tar -C /rust -xzf ${RUST_ARCHIVE} --strip-components=1 \
     && rm ${RUST_ARCHIVE} \
     && ./install.sh
-
-COPY config/cargo.conf /root/.cargo/config
