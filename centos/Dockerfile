@@ -2,7 +2,8 @@ FROM centos:centos7.2.1511
 
 MAINTAINER Tony Deng "wolf.deng@mgmail.com"
 
-RUN yum -y update && yum clean all && yum -y install git gcc curl openssl openssl-devel ca-certificates tar && yum clean all
+RUN yum -y update && yum clean all
+RUN yum -y install git gcc curl openssl openssl-devel ca-certificates tar && yum clean all
 
 ENV RUST_ARCHIVE=rust-1.39.0-x86_64-unknown-linux-gnu.tar.gz
 ENV RUST_DOWNLOAD_URL=https://static.rust-lang.org/dist/${RUST_ARCHIVE}
